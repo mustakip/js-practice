@@ -1,16 +1,4 @@
-const extractCommon = function(array1,array2) {
-  let intersection = [""];
-  let actualIntersect = ["undefined"];
-  for(elements in array1) {
-    intersection[array1[elements]] = array1[elements];
-  }
-  for(elements in array2) {
-    if(intersection[array2[elements]] == array2[elements]) {
-      actualIntersect[array2[elements]] = array2[elements];
-    }
-  }
-  return actualIntersect;
-}
+const extractCommon = require("./lib.js").extractCommon;
 
 const main = function() {
   let array = [[22,47,86,39,87,67,56],
