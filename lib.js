@@ -68,6 +68,23 @@ const extractInfo = function(employeeData) {
   return info;
 }
 
+"------------------------------------------------------------------"
+                     "manipulate_string.js"
+"------------------------------------------------------------------"
+
+
+const replaceElement = function(array,element,position) {
+  for(let index in array) {
+    if(index == position) {
+      for(let post = array.length; post >= index; post--) {
+        array[post] = array[post-1];
+      }
+    }
+  }
+  array[position] = element;
+  return array;
+}
+
 
 
 exports.extractCommon = extractCommon;
@@ -75,3 +92,4 @@ exports.extractBirthdate =extractBirthdate;
 exports.extractName = extractName;
 exports.extractInfo = extractInfo;
 exports.extractAge = extractAge;
+exports.replaceElement = replaceElement;

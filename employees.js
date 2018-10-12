@@ -42,55 +42,6 @@ let employeeData = [{EmployeeId : 22805, Name : "aftab", DateOfBirth : "05-Jul-1
 {EmployeeId : 22788, Name : "tilak", DateOfBirth : "29-May-1999"},
 {EmployeeId : 22822, Name : "tushar", DateOfBirth : "30-Sep-1999"}]
 
-//const extractBirthdate = function(employeeData) {
-  //let birthdate = [""];
-  //let no = 0;
-  //for(employeeNo in employeeData) {
-    //for(property in employeeData[employeeNo]) {
-      //birthdate[no] = employeeData[employeeNo]["DateOfBirth"];
-    //}
-    //no++;
-  //}
-  //return birthdate;
-//}
-////
-//
-//const extractAge = function(birthdate) {
-  //let age = [""];
-  //let no = 0;
-  //for(elements in birthdate) {
-    //array = birthdate[elements].split("-");
-    //age[no] = 2018 - array[2];
-    //no++;
-  //}
-  //return age;
-//}
-//
-//const extractName = function(employeeData) {
-  //let names = [""];
-  //let no = 0;
-  //for(employeeNo in employeeData) {
-    //for(property in employeeData[employeeNo]) {
-      //names[no] = employeeData[employeeNo]["Name"];
-    //}
-    //no++;
-  //}
-  //return names;
-//}
-//
-//const extractInfo = function(employeeData) {
-  //birthdate = extractBirthdate(employeeData);
-  //age = extractAge(birthdate);
-  //names = extractName(employeeData);
-  //let info = [""];
-  //let no = 0;
-  //for(let employeeNo = 0; employeeNo < employeeData.length; employeeNo++) {
-    //info[no] = names[no]+"  =  "+age[no];
-    //no++;
-  //}
-  //return info;
-//}
-
 const main = function() {
   info = extractInfo(employeeData);
   for(element in info) {
