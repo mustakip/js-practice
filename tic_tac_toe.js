@@ -5,12 +5,6 @@ const input = function(message) {
   return intake;
 }
 
-console.log("-----------------------Welcome to the Game-----------------------------");
-input();
-let player1 = input("Enter Player - 1 Name :  ");
-let player2 = input("Enter Player - 2 Name :  ");
-console.log(player1+"'s symbol : X ");
-console.log(player2+"'s symbol : O ");
 
 const chooseSymbol = function(chance) {
   symbol = "X";
@@ -20,7 +14,7 @@ const chooseSymbol = function(chance) {
   return symbol;
 }
 
-const whosTurn = function(chance) {
+const whosTurn = function(chance,player1,player2) {
   player = player1;
   if(chance % 2 != 0) {
     player = player2;
@@ -28,28 +22,30 @@ const whosTurn = function(chance) {
   return player;
 }
 
-const runGame = function() { 
+const runGame = function(player1,player2) { 
   let array = new Array(10).fill(" ");
   let assurance = [];
   let numbers = [1,2,3,4,5,6,7,8,9];
   for(let chance = 0; chance < 9;chance++) {
-    let index = +input("Enter a number "+whosTurn(chance)+"   :  ");
-    if(!assurance.includes(index) && numbers.includes(index)) {
-      array[index] = chooseSymbol(chance);
-      console.clear();
-      console.log(builtGame(array));
-      assurance.push(index);
-      if(hasWon(array,array[index])){
-        console.log(whosTurn(chance)+" wins the Game..COUGRATULATIONS....!");
-        return "Game Over";
-      }
-    }else {
-      chance--;
-      console.log("the Block is already takenor invalid number entered try again..")
-
+    let index = +input("Enter a number "+whosTurn(chance,player1,player2)+"   :  ");
+    switch(!assurance.includes(index) && numbers.includes(index)) {
+      case true :
+        array[index] = chooseSymbol(chance);
+        console.clear();
+        console.log(builtGame(array));
+        assurance.push(index);
+        if(hasWon(array,array[index])){
+          console.log(whosTurn(chance,player1,player2)+" wins the Game..COUGRATULATIONS....!");
+          return "Game Over";
+        }
+        break;
+      case false :
+        chance--;
+        console.log("the Block is already takenor invalid number entered try again..")
+        break;
     }
   }
-  return "game draw";
+  return "OPPS !! Game Draw....";
 }
 
 const hasWon = function(array,symbol) {
@@ -68,4 +64,14 @@ const builtGame = function(array) {
   return patternArray.join("\n");
 }
 
-runGame();
+const main = function() {
+console.log("-----------------------Welcome to the Game-----------------------------");
+input("Press any key to begin..");
+let player1 = input("Enter Player - 1 Name :  ");
+let player2 = input("Enter Player - 2 Name :  ");
+console.log(player1+"'s symbol : X ");
+console.log(player2+"'s symbol : O ");
+console.log(runGame(player1,player2));
+}
+
+main();
