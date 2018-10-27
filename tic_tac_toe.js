@@ -6,20 +6,34 @@ const input = function(message) {
 }
 
 
-const chooseSymbol = function(chance) {
-  symbol = "X";
+const whichPlayer = function (chance,player1,player2) {
+  playerInfo = {player : player1,symbol : "X"};
   if(chance % 2 != 0) {
-    symbol = "O";
+    playerInfo = {player : player2,symbol : "O"};
   }
-  return symbol;
+  return playerInfo;
 }
 
-const whosTurn = function(chance,player1,player2) {
-  player = player1;
-  if(chance % 2 != 0) {
-    player = player2;
+const changePlayer = function(allArguments) {
+  let {numbers,index,array,chance,assurance,playerInfo} = allArguments;
+  let {player,symbol} = playerInfo;
+  switch(!assurance.includes(index) && numbers.includes(index)) {
+    case true :
+      array[index] = symbol;
+      console.clear();
+      console.log(builtGame(array));
+      assurance.push(index);
+      if(hasWon(array,array[index])){
+        console.log(player+" wins the Game..COUGRATULATIONS....!");
+        return "Game Over";
+      }
+      break;
+    case false :
+      chance--;
+      console.log("the Block is already taken or invalid number entered try again..")
+      break;
   }
-  return player;
+  return chance;
 }
 
 const runGame = function(player1,player2) { 
@@ -27,23 +41,14 @@ const runGame = function(player1,player2) {
   let assurance = [];
   let numbers = [1,2,3,4,5,6,7,8,9];
   for(let chance = 0; chance < 9;chance++) {
-    let index = +input("Enter a number "+whosTurn(chance,player1,player2)+"   :  ");
-    switch(!assurance.includes(index) && numbers.includes(index)) {
-      case true :
-        array[index] = chooseSymbol(chance);
-        console.clear();
-        console.log(builtGame(array));
-        assurance.push(index);
-        if(hasWon(array,array[index])){
-          console.log(whosTurn(chance,player1,player2)+" wins the Game..COUGRATULATIONS....!");
-          return "Game Over";
-        }
-        break;
-      case false :
-        chance--;
-        console.log("the Block is already takenor invalid number entered try again..")
-        break;
+    let playerInfo = whichPlayer(chance,player1,player2);
+    let index = +input("Enter a number "+playerInfo.player+"   :  ");
+    let allArguments = {playerInfo,array,assurance,numbers,chance,index};
+    let msg = changePlayer(allArguments);
+    if(msg == "Game Over") {
+      return "Game Over";
     }
+    chance = msg;
   }
   return "OPPS !! Game Draw....";
 }

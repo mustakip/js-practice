@@ -4,7 +4,6 @@ const input = function(message) {
   let intake = readline.question(message);
   return intake;
 }
-
 const generateArray = function(length) {
   let array = [];
   for(let index = 0 ; index <length; index++) {
